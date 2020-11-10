@@ -26,7 +26,7 @@ protocol SwipeControllerDelegate: class {
     
 }
 
-class SwipeController: NSObject {
+open class SwipeController: NSObject {
     
     weak var swipeable: (UIView & Swipeable)?
     weak var actionsContainerView: UIView?
@@ -343,7 +343,7 @@ class SwipeController: NSObject {
 }
 
 extension SwipeController: UIGestureRecognizerDelegate {
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if gestureRecognizer == tapGestureRecognizer {
             if UIAccessibility.isVoiceOverRunning {
                 scrollView?.hideSwipeables()
@@ -370,11 +370,11 @@ extension SwipeController: UIGestureRecognizerDelegate {
 }
 
 extension SwipeController: SwipeActionsViewDelegate {
-    func swipeActionsView(_ swipeActionsView: SwipeActionsView, didSelect action: SwipeAction) {
+    public func swipeActionsView(_ swipeActionsView: SwipeActionsView, didSelect action: SwipeAction) {
         perform(action: action)
     }
     
-    func perform(action: SwipeAction) {
+    public func perform(action: SwipeAction) {
         guard let actionsView = swipeable?.actionsView else { return }
         
         if action == actionsView.expandableAction, let expansionStyle = actionsView.options.expansionStyle {
@@ -392,7 +392,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         }
     }
     
-    func perform(action: SwipeAction, hide: Bool) {
+    public func perform(action: SwipeAction, hide: Bool) {
         guard let indexPath = swipeable?.indexPath else { return }
 
         if hide {
@@ -402,7 +402,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         action.handler?(action, indexPath)
     }
     
-    func performFillAction(action: SwipeAction, fillOption: SwipeExpansionStyle.FillOptions) {
+    public func performFillAction(action: SwipeAction, fillOption: SwipeExpansionStyle.FillOptions) {
         guard let swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         guard let actionsView = swipeable.actionsView, let indexPath = swipeable.indexPath else { return }
 
@@ -459,7 +459,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         }
     }
     
-    func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
+    public func hideSwipe(animated: Bool, completion: ((Bool) -> Void)? = nil) {
         guard var swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         guard swipeable.state == .left || swipeable.state == .right else { return }
         guard let actionView = swipeable.actionsView else { return }
@@ -482,7 +482,7 @@ extension SwipeController: SwipeActionsViewDelegate {
         delegate?.swipeController(self, didEndEditingSwipeableFor: actionView.orientation)
     }
     
-    func resetSwipe() {
+    public func resetSwipe() {
         guard let swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         
         let targetCenter = self.targetCenter(active: false)
@@ -491,13 +491,13 @@ extension SwipeController: SwipeActionsViewDelegate {
         swipeable.actionsView?.visibleWidth = abs(actionsContainerView.frame.minX)
     }
     
-    func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    public func showSwipe(orientation: SwipeActionsOrientation, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         setSwipeOffset(.greatestFiniteMagnitude * orientation.scale * -1,
                        animated: animated,
                        completion: completion)
     }
     
-    func setSwipeOffset(_ offset: CGFloat, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
+    public func setSwipeOffset(_ offset: CGFloat, animated: Bool = true, completion: ((Bool) -> Void)? = nil) {
         guard var swipeable = self.swipeable, let actionsContainerView = self.actionsContainerView else { return }
         
         guard offset != 0 else {

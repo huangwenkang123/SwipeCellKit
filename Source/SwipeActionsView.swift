@@ -7,11 +7,11 @@
 
 import UIKit
 
-protocol SwipeActionsViewDelegate: class {
+public protocol SwipeActionsViewDelegate: class {
     func swipeActionsView(_ swipeActionsView: SwipeActionsView, didSelect action: SwipeAction)
 }
 
-class SwipeActionsView: UIView {
+open class SwipeActionsView: UIView {
     weak var delegate: SwipeActionsViewDelegate?
     
     let transitionLayout: SwipeTransitionLayout
@@ -27,13 +27,13 @@ class SwipeActionsView: UIView {
 
     weak var safeAreaInsetView: UIView?
     let orientation: SwipeActionsOrientation
-    let actions: [SwipeAction]
-    let options: SwipeOptions
+    public let actions: [SwipeAction]
+    public let options: SwipeOptions
     
-    var buttons: [SwipeActionButton] = []
+    public var buttons: [SwipeActionButton] = []
     
-    var minimumButtonWidth: CGFloat = 0
-    var maximumImageHeight: CGFloat {
+    public var minimumButtonWidth: CGFloat = 0
+    public var maximumImageHeight: CGFloat {
         return actions.reduce(0, { initial, next in max(initial, next.image?.size.height ?? 0) })
     }
     
@@ -134,7 +134,7 @@ class SwipeActionsView: UIView {
         buttons = addButtons(for: self.actions, withMaximum: maxSize, contentEdgeInsets: contentEdgeInsets)
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -269,7 +269,7 @@ class SwipeActionsView: UIView {
         return mask
     }
     
-    override func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         for subview in subviews.enumerated() {

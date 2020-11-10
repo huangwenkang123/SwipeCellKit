@@ -7,7 +7,7 @@
 
 import UIKit
 
-class SwipeActionButton: UIButton {
+public class SwipeActionButton: UIButton {
     var spacing: CGFloat = 8
     var shouldHighlight = true
     var highlightedBackgroundColor: UIColor?
@@ -34,7 +34,7 @@ class SwipeActionButton: UIButton {
         }
     }
     
-    override var intrinsicContentSize: CGSize {
+    public override var intrinsicContentSize: CGSize {
         return CGSize(width: UIView.noIntrinsicMetric, height: contentEdgeInsets.top + alignmentRect.height + contentEdgeInsets.bottom)
     }
     
@@ -61,7 +61,7 @@ class SwipeActionButton: UIButton {
         setImage(action.highlightedImage ?? action.image, for: .highlighted)
     }
     
-    override var isHighlighted: Bool {
+    public override var isHighlighted: Bool {
         didSet {
             guard shouldHighlight else { return }
             
@@ -86,13 +86,13 @@ class SwipeActionButton: UIButton {
                                   context: nil).integral
     }
     
-    override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
+    public override func titleRect(forContentRect contentRect: CGRect) -> CGRect {
         var rect = contentRect.center(size: titleBoundingRect(with: contentRect.size).size)
         rect.origin.y = alignmentRect.minY + imageHeight + currentSpacing
         return rect.integral
     }
     
-    override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
+    public override func imageRect(forContentRect contentRect: CGRect) -> CGRect {
         var rect = contentRect.center(size: currentImage?.size ?? .zero)
         rect.origin.y = alignmentRect.minY + (imageHeight - rect.height) / 2
         return rect

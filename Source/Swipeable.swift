@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Internal 
 
-protocol Swipeable {
+public protocol Swipeable {
     var state: SwipeState { get set }
     
     var actionsView: SwipeActionsView? { get set }
@@ -26,7 +26,7 @@ protocol Swipeable {
 extension SwipeTableViewCell: Swipeable {}
 extension SwipeCollectionViewCell: Swipeable {}
 
-enum SwipeState: Int {
+public enum SwipeState: Int {
     case center = 0
     case left
     case right
