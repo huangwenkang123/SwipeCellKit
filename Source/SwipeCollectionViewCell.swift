@@ -18,15 +18,15 @@ open class SwipeCollectionViewCell: UICollectionViewCell {
     /// The object that acts as the delegate of the `SwipeCollectionViewCell`.
     public weak var delegate: SwipeCollectionViewCellDelegate?
     
-    var state = SwipeState.center
-    var actionsView: SwipeActionsView?
-    var scrollView: UIScrollView? {
+    public var state = SwipeState.center
+    public var actionsView: SwipeActionsView?
+    public var scrollView: UIScrollView? {
         return collectionView
     }
-    var indexPath: IndexPath? {
+    public var indexPath: IndexPath? {
         return collectionView?.indexPath(for: self)
     }
-    var panGestureRecognizer: UIGestureRecognizer
+    public var panGestureRecognizer: UIGestureRecognizer
     {
         return swipeController.panGestureRecognizer;
     }

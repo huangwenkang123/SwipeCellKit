@@ -18,23 +18,23 @@ open class SwipeTableViewCell: UITableViewCell {
     /// The object that acts as the delegate of the `SwipeTableViewCell`.
     public weak var delegate: SwipeTableViewCellDelegate?
     
-    var state = SwipeState.center
-    var actionsView: SwipeActionsView?
-    var scrollView: UIScrollView? {
+    public var state = SwipeState.center
+    public var actionsView: SwipeActionsView?
+    public var scrollView: UIScrollView? {
         return tableView
     }
-    var indexPath: IndexPath? {
+    open var indexPath: IndexPath? {
         return tableView?.indexPath(for: self)
     }
-    var panGestureRecognizer: UIGestureRecognizer
+    open var panGestureRecognizer: UIGestureRecognizer
     {
         return swipeController.panGestureRecognizer;
     }
     
-    var swipeController: SwipeController!
-    var isPreviouslySelected = false
+    open var swipeController: SwipeController!
+    open var isPreviouslySelected = false
     
-    weak var tableView: UITableView?
+    public weak var tableView: UITableView?
     
     /// :nodoc:
     open override var frame: CGRect {

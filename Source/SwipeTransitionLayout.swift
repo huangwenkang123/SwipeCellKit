@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - Layout Protocol
 
-protocol SwipeTransitionLayout {
+public protocol SwipeTransitionLayout {
     func container(view: UIView, didChangeVisibleWidthWithContext context: ActionsViewLayoutContext)
     func layout(view: UIView, atIndex index: Int, with context: ActionsViewLayoutContext)
     func visibleWidthsForViews(with context: ActionsViewLayoutContext) -> [CGFloat]
@@ -17,7 +17,7 @@ protocol SwipeTransitionLayout {
 
 // MARK: - Layout Context 
 
-struct ActionsViewLayoutContext {
+public struct ActionsViewLayoutContext {
     let numberOfActions: Int
     let orientation: SwipeActionsOrientation
     let contentSize: CGSize
